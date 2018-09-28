@@ -34,28 +34,76 @@ class ViewController: UIViewController {
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
     
-    // TODO Step 5: Initialise instance variables here
+    var storyIndex : Int = 1
     
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
-        
+        beginStory()
     }
 
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
     
-        // TODO Step 4: Write an IF-Statement to update the views
-                
-        // TODO Step 6: Modify the IF-Statement to complete the story
-        
+        if storyIndex == 1 {
+            if sender.tag == 1 {
+                storyIndex = 3
+                storyTextView.text = story3
+                topButton.setTitle(answer3a, for: .normal)
+                bottomButton.setTitle(answer3b, for: .normal)
+            }
+            else if sender.tag == 2 {
+                storyIndex = 2
+                storyTextView.text = story2
+                topButton.setTitle(answer2a, for: .normal)
+                bottomButton.setTitle(answer2b, for: .normal)
+            }
+        }
+        else if storyIndex == 2 {
+            if sender.tag == 1 {
+                storyIndex = 3
+                storyTextView.text = story3
+                topButton.setTitle(answer3a, for: .normal)
+                bottomButton.setTitle(answer3b, for: .normal)
+            }
+            if sender.tag == 2 {
+                storyIndex = 4
+                storyTextView.text = story4
+                endStory()
+            }
+        }
+        else if storyIndex == 3 {
+            if sender.tag == 1 {
+                storyIndex = 6
+                storyTextView.text = story6
+                endStory()
+            }
+            else if sender.tag == 2 {
+                storyIndex = 5
+                storyTextView.text = story5
+                endStory()
+            }
+        }
+        else {
+            beginStory()
+        }
     
+    }
+    
+    func beginStory() {
+        storyIndex = 1
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        topButton.isHidden = false
+        bottomButton.setTitle(answer1b, for: .normal)
+    }
+    
+    func endStory() {
+        topButton.isHidden = true
+        bottomButton.setTitle("Restart Story", for: .normal)
     }
     
 
